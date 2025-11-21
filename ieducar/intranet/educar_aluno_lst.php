@@ -72,6 +72,13 @@ return new class extends clsListagem
             $this->$var = ($val === '') ? null : $val;
         }
 
+        if (!empty($this->cpf_aluno)) {
+            if (!CPFValidator($this->cpf_aluno)) {
+                $this->addMensagem("CPF inválido.", "danger");
+                return false;
+            }
+        }
+
         $this->campoNumero(nome: 'cod_aluno', campo: _cl(key: 'aluno.detalhe.codigo_aluno'), valor: $this->cod_aluno, tamanhovisivel: 20, tamanhomaximo: 9);
 
         if ($configuracoes['mostrar_codigo_inep_aluno']) {
